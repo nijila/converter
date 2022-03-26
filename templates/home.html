@@ -37,7 +37,9 @@
     <h1>Numbet to Text Converter</h1>
   </div>
 <body>
+ 
     <form id="myform"  method='POST'>
+      {% csrf_token %}
     <label for="field">Enter a number: </label>
     <input class="left" id="field" name="field">
     <br/>

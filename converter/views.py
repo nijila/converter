@@ -10,6 +10,8 @@ import simplejson
 class index(base.View):
     def get(self, request):
         return render(request, 'home.html',{})
+    def post(self, request):
+        return render(request, 'home.html',{})
 
 @csrf_exempt
 def converttotext(request):

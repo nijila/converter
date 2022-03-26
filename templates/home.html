@@ -43,10 +43,18 @@
     <input class="left" id="field" name="field">
     <br/>
     <input id="submit" type="submit" value="Validate!">
+    <div id="messages" data-hide-after="5000">
+      {% for message in messages %}
+          <div id="notice" align="center">
+              {{ message }}
+          </div>
+      {% endfor %}
+      </div>
     <!-- {% for error in messages %}
     <p>{{ error }}</p><br>
     {% endfor %} -->
     </form>
+    
     {% load static %}
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="{% get_static_prefix %}validate.js"></script>
@@ -74,30 +82,21 @@
             data: {'number':number},
             type: 'POST',
             success: function (resp) {
-                alert(resp['success']);
+              alert("converted text"+": "+resp['success'])
             },
             error: function(e){
                 alert('Error: '+e);
+                
             }  
         });
       }
       
     });
   
-       
-    // $.ajax({
-    //            headers: {
-    //                "X-CSRFToken": getCookie('csrftoken')
-    //            },
-    //            url: "/biller/patient_id_search/",
-    //            type: "POST",
-    //            dataType: "JSON",
-    //            // async: false,
-    //            data: {
-    //               'op_number': op_no,
-    //               'search_count' : 0
-    //            },
-    //            success: function(data) {
+    // $(document).ready( function() {
+    //     $('#messages').delay(1000).fadeOut();
+    //   });
+    // 
     </script>
     </body>
 </html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css"> -->
+
+    <style>
+        body{
+            background-color:rgb(165, 192, 202);
+        }
+        /* <style> */
+        /* Style the body */
+        /* body {
+        font-family: Arial;
+        margin: 0;
+        } */
+
+        /* Header/Logo Title */
+        .header {
+        padding: 20px;
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 30px;
+        }
+
+        /* Page Content */
+        .content {padding:20px;
+                  align-content: center;
+                  text-align: center;}
+        </style>
+    </style>
+    <title>Numbet to Text Converter</title>
+</head>
+
+<div class="header">
+    <h1>Numbet to Text Converter</h1>
+  </div>
+<body>
+    <form id="myform"  method='POST'>
+    <label for="field">Enter a number: </label>
+    <input class="left" id="field" name="field">
+    <br/>
+    <input id="submit" type="submit" value="Validate!">
+    <!-- {% for error in messages %}
+    <p>{{ error }}</p><br>
+    {% endfor %} -->
+    </form>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{% get_static_prefix %}validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script>
+
+    // jQuery.validator.setDefaults({
+    //   debug: true,
+    //   success: "valid"
+    // });
+    $( "#myform" ).validate({
+      rules: {
+        field: {
+          required: true,
+          digits: true
+        }
+        
+      },
+
+      success: function(label) {
+        var number = $("#field").val();
+
+        $.ajax({        
+            url: '/converttotext/',
+            data: {'number':number},
+            type: 'POST',
+            success: function (resp) {
+                alert(resp['success']);
+            },
+            error: function(e){
+                alert('Error: '+e);
+            }  
+        });
+      }
+      
+    });
+  
+       
+    // $.ajax({
+    //            headers: {
+    //                "X-CSRFToken": getCookie('csrftoken')
+    //            },
+    //            url: "/biller/patient_id_search/",
+    //            type: "POST",
+    //            dataType: "JSON",
+    //            // async: false,
+    //            data: {
+    //               'op_number': op_no,
+    //               'search_count' : 0
+    //            },
+    //            success: function(data) {
+    </script>
+    </body>
+</html>
